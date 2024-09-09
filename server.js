@@ -15,7 +15,8 @@ router.get('/nifi-latest-version', async (ctx) => {
         const $ = cheerio.load(data);
 
         // Extract the latest version number (this example assumes a specific structure)
-        const latestVersion = $('a[href*="nifi-"]').first().text().trim();
+        const latestVersion = $('a[href*="nifi-"]').first().text().trim().replace(/^Source\s*/, '');
+
 
         if (!latestVersion) {
             ctx.status = 404;
