@@ -1,4 +1,3 @@
-# app/services.py
 import re
 
 import httpx
@@ -6,7 +5,7 @@ from bs4 import BeautifulSoup
 from fastapi import HTTPException
 
 
-async def fetch_versions(url: str):
+async def fetch_nifi_versions(url: str):
     try:
         async with httpx.AsyncClient() as client:
             response = await client.get(url)

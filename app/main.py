@@ -1,9 +1,8 @@
-# app/main.py
 from fastapi import FastAPI
 
-from .routes.versions import router as versions_router
+from app.routes.nifi import router as nifi_router
 
 app = FastAPI()
 
-# Include routers
-app.include_router(versions_router)
+# Include routers for different datasources
+app.include_router(nifi_router)
