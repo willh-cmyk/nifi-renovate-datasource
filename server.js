@@ -8,18 +8,17 @@ const router = new Router();
 
 router.get('/nifi-latest-version', async (ctx) => {
     try {
-        const url = 'https://nifi.apache.org/download.html';
+        const url = 'https://archive.apache.org/dist/nifi/';
         const { data } = await axios.get(url);
         const $ = cheerio.load(data);
 
         // Extract version numbers from the page
         const versions = [];
-        $('a[href*="nifi-"]').each((i, elem) => {
-            const versionText = $(elem).text().trim();
-            const match = versionText.match(/(\d+\.\d+\.\d+[-\w]*)/);
+        $('a').each((i, elem) => {
+            const versionText = $(elem).attr('href').trim();
+            const match = versionText.match(/(\d+\.\d+\.\d+[-\w]*)\/$/);
             if (match) {
-                // Remove the 'v' prefix if it exists
-                const version = match[1];
+                const version = match[1]; // Extract matched version
                 if (!versions.includes(version)) {
                     versions.push(version);
                 }
