@@ -18,7 +18,8 @@ router.get('/nifi-latest-version', async (ctx) => {
             const versionText = $(elem).text().trim();
             const match = versionText.match(/(\d+\.\d+\.\d+[-\w]*)/);
             if (match) {
-                const version = `v${match[1]}`;
+                // Remove the 'v' prefix if it exists
+                const version = match[1];
                 if (!versions.includes(version)) {
                     versions.push(version);
                 }
